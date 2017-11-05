@@ -1,40 +1,53 @@
 import java.util.Scanner;
 
 class Main{
-    public static void main (String[]  args){
-       java.util.Scanner in = new java.util.Scanner(System.in);
+    public static void main (String[]  args) {
+        java.util.Scanner in = new java.util.Scanner(System.in);
+        int x = in.nextInt();
+        int y = in.nextInt();
+        String commandStr = in.next();
+        int n = commandStr.length();
+        int [] xx = new int [n];
+        int [] yy = new int [n];
+        boolean fail = false;
+        int i ;
+        for( i = 0 ; i<=n-1 && !fail ; i++){
 
-        long a = in.nextInt();
-        long b = in.nextInt();
-        long c = in.nextInt();
-        long d = in.nextInt();
-        int n = in.nextInt();
-        long[] aa = new long[n];
-        for(int i = 0; i <= n-1; i++){
-           aa[i] = in.nextInt();
-        }
-
-        for (int i = 0; i <=n-1;i++){
-
-            long p = 0;
-            long q = (b-a+1)*(d-c+1);
+            xx[i] = x;
+            yy[i] = y;
 
 
-            long ai = aa[i];
+            char c = commandStr.charAt(i);
+            if (c == 'L'){
+                x = x-1;
+            } else if(c == 'R'){
+                x = x + 1;
+            } else if(c == 'U'){
+                y = y + 1;
+            } else if(c == 'D'){
+                y = y - 1;
+            }
 
 
-            long ax = Math.max(a, ai/d);
-            long bx = Math.min(b,ai/c);
-
-
-            for(long i1=ax;i1 <= bx;i1++){
-                long r = ai / i1;
-                if(ai%i1==0 && r>=c && r<=d){
-                    p = p + 1;
+            for(int j = 0; j <= i-1;j++){
+                if(x==xx[j] && y == yy[j]){
+                    fail = true;
+                    break;
                 }
             }
 
-            System.out.println(p+"/"+q);
+        }
+
+        String r;
+        if(fail){
+            r = "Fail";
+        } else {
+            r = "Success";
+        }
+        System.out.print(r);
+        if(fail){
+            System.out.println();
+            System.out.print(i);
         }
     }
 }
